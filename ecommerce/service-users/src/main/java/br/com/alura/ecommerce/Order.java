@@ -15,19 +15,6 @@ public class Order {
     }
 
     public String getEmail() {
-        return email;
-    }
-
-    public BigDecimal getAmount() {
-        return amount;
-    }
-
-    @Override
-    public String toString() {
-        return "Order{" +
-                "orderId='" + orderId + '\'' +
-                ", amount=" + amount +
-                ", email='" + email + '\'' +
-                '}';
+        return this.email;
     }
 }

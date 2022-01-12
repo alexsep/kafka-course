@@ -11,7 +11,6 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.Properties;
 import java.util.UUID;
-import java.util.concurrent.ExecutionException;
 import java.util.regex.Pattern;
 
 class KafkaConsumerService<T> implements Closeable {
@@ -41,10 +40,7 @@ class KafkaConsumerService<T> implements Closeable {
                 for (var record : records) {
                     try {
                         parse.consume(record);
-                    } catch (ExecutionException e) {
-                        // just logging the exception
-                        e.printStackTrace();
-                    } catch (InterruptedException e) {
+                    } catch (Exception e) {
                         // just logging the exception
                         e.printStackTrace();
                     }
