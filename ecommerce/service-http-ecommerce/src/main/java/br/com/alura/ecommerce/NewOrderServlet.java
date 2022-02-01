@@ -40,10 +40,12 @@ public class NewOrderServlet extends HttpServlet {
 
     private void dispatchOrder(Order order) throws ServletException {
         try {
-            orderDispatcher.send("ECOMMERCE_NEW_ORDER", order.getEmail(), order);
+            orderDispatcher.send("ECOMMERCE_NEW_ORDER", order.getEmail(),
+                    new CorrelationId(NewOrderServlet.class.getSimpleName()), order);
 
             var email = "Thanks! We are processing your order!";
-            emailDispatcher.send("ECOMMERCE_SEND_EMAIL", order.getEmail(), email);
+            emailDispatcher.send("ECOMMERCE_SEND_EMAIL", order.getEmail(),
+                    new CorrelationId(NewOrderServlet.class.getSimpleName()), email);
 
             System.out.println("New order sent successfully");
         } catch (ExecutionException e) {
